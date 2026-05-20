@@ -37,7 +37,7 @@ CLASS_NAMES = {0: "NORMAL", 1: "PNEUMONIA"}
 def load_model():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = AutoModelForImageClassification.from_pretrained(
-        MODEL_NAME,
+        MODEL_PATH,
         num_labels=2,
         ignore_mismatched_sizes=True,
     ).to(device)
