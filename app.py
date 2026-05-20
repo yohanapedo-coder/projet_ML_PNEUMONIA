@@ -9,6 +9,24 @@ from transformers import AutoModelForImageClassification
 from pytorch_grad_cam import GradCAM
 from pytorch_grad_cam.utils.model_targets import ClassifierOutputTarget
 from pytorch_grad_cam.utils.image import show_cam_on_image
+import os
+import requests
+from io import BytesIO
+from zipfile import ZipFile
+
+# Téléchargement du modèle
+url = "https://github.com/yohanapedo-coder/projet_ML_PNEUMONIA/releases/download/model/model_weights.zip"
+extract_dir = "./"
+
+response = requests.get(url)
+response.raise_for_status()
+
+with ZipFile(BytesIO(response.content)) as zip_ref:
+    zip_ref.extractall(extract_dir)
+
+print(f"Archive extraite dans : {extract_dir}")
+
+MODEL_PATH = "./model_weights/"
 
 st.set_page_config(page_title="Radiologie médicale", page_icon="🩻", layout="wide")
 
